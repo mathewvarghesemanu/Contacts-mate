@@ -1,5 +1,5 @@
 class CurrentUser {
-  String name = 'Mathew Varghese';
+  String name = 'Mathew';
   String designation = 'Engineer';
 
   String phone = '+91-9446050001';
@@ -7,7 +7,9 @@ class CurrentUser {
 }
 
 class NewUser {
-  String name;
+  String firstName;
+  String lastName;
+
   String designation;
   var phone;
   var email;

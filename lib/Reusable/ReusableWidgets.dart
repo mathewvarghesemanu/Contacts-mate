@@ -7,9 +7,10 @@ class ApplyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+      elevation: 5,
       color: Colors.blueGrey[100],
-      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
+      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 85),
       child: ListTile(
         title: Text(
           label,
@@ -42,8 +43,11 @@ class _TextFieldsState extends State<TextFields> {
         style: TextStyle(color: Colors.white),
         onChanged: (value) {
           switch (widget.newarg) {
-            case 'name':
-              widget.newuser.name = value;
+            case 'firstName':
+              widget.newuser.firstName = value;
+              break;
+            case 'lastName':
+              widget.newuser.lastName = value;
               break;
             case 'designation':
               widget.newuser.designation = value;
@@ -58,7 +62,7 @@ class _TextFieldsState extends State<TextFields> {
         },
         decoration: InputDecoration(
           focusColor: Colors.white,
-          hintText: 'Enter your ' + widget.newarg,
+          hintText: widget.newarg,
           hintStyle: TextStyle(color: Colors.white70),
           contentPadding:
               EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

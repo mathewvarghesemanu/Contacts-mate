@@ -6,7 +6,7 @@ import 'package:business_card/Screens/AddScreen.dart';
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MaterialApp(
-    initialRoute: HomeScreen().id,
+    initialRoute: AddScreen().id,
     routes: {
       HomeScreen().id: (context) => HomeScreen(),
       AddScreen().id: (context) => AddScreen(),
