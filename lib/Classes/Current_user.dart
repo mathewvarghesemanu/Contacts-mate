@@ -9,6 +9,6 @@ class CurrentUser {
 class NewUser {
   String name;
   String designation;
-  String phone;
-  String email;
+  var phone;
+  var email;
 }

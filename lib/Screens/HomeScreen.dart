@@ -1,7 +1,8 @@
-import 'package:business_card/AddScreen.dart';
+import 'package:business_card/Screens/AddScreen.dart';
 import 'package:flutter/material.dart';
-import 'Current_user.dart';
+import '../Classes/Current_user.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:business_card/Reusable/ReusableWidgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -103,22 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, AddScreen().id);
                 });
               },
-              child: Card(
-                elevation: 10,
-                color: Colors.blueGrey[100],
-                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
-                child: ListTile(
-                  title: Text(
-                    'Add Contact',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Blinker',
-                      color: Colors.black87,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
+              child: new ApplyCard(label: 'Add Contact'),
             ),
             FlatButton.icon(
               onPressed: () {
