@@ -29,7 +29,7 @@ class ApplyCard extends StatelessWidget {
 class TextFields extends StatefulWidget {
   TextFields({this.newarg, this.newuser});
   final newarg;
-  final NewUser newuser;
+  var newuser;
   @override
   _TextFieldsState createState() => _TextFieldsState();
 }

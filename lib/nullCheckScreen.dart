@@ -1,5 +1,6 @@
 import 'package:business_card/Classes/Current_user.dart';
 import 'package:business_card/Classes/getimage.dart';
+import 'package:business_card/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:contacts_service/contacts_service.dart';
@@ -24,7 +25,6 @@ class NullaScreen extends StatefulWidget {
 
 class _NullaScreenState extends State<NullaScreen> {
   final user = CurrentUser();
-  final newuser = NewUser();
   bool loading = false;
 
   @override
@@ -58,44 +58,24 @@ class _NullaScreenState extends State<NullaScreen> {
               Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextFields(newarg: 'firstName', newuser: newuser),
+                    child: TextFields(newarg: 'firstName', newuser: user),
                   ),
                   Expanded(
-                      child: TextFields(newarg: 'lastName', newuser: newuser)),
+                      child: TextFields(newarg: 'lastName', newuser: user)),
                 ],
               ),
-              TextFields(newarg: 'designation', newuser: newuser),
-              TextFields(newarg: 'phone number', newuser: newuser),
-              TextFields(newarg: 'email', newuser: newuser),
-              GestureDetector(
-                onTap: () async {
-                  Item phone = Item(label: 'Work', value: newuser.phone);
-                  Item email = Item(label: 'Work', value: newuser.email);
-
-                  await checkContactsPermission();
-                  try {
-                    Contact newContact = Contact(
-                      givenName: newuser.firstName,
-                      familyName: newuser.lastName,
-                      phones: [phone],
-                      emails: [email],
-                    );
-
-                    print(newContact.givenName);
-                    print(newContact.phones.toList()[0].value);
-                    print(newContact.emails.toList()[0].value);
-                    loading = true;
-                    await ContactsService.addContact(newContact);
-                    loading = false;
-                    Alert(
-                            content: Icon(Icons.check),
-                            context: context,
-                            title: "Contact Added",
-                            desc: newContact.givenName)
-                        .show();
-                  } catch (e) {
-                    print('error*********assas');
-                  }
+              TextFields(newarg: 'designation', newuser: user),
+              TextFields(newarg: 'phone number', newuser: user),
+              TextFields(newarg: 'email', newuser: user),
+              InkWell(
+                onTap: () {
+                  Alert(
+                    content: Icon(Icons.check),
+                    context: context,
+                    title: "Contact Updated",
+                  );
+                  setState(() {});
+                  Navigator.pushNamed(context, HomeScreen().id);
                 },
                 child: ApplyCard(
                   label: 'Update my details',
