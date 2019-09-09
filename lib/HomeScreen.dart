@@ -1,6 +1,7 @@
 import 'package:business_card/AddScreen.dart';
 import 'package:flutter/material.dart';
 import 'Current_user.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -93,9 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+//            SizedBox(
+//              height: 10,
+//            ),
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -120,11 +121,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             FlatButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Alert(
+                  context: context,
+                  title: "SCAN ME",
+                  image: Image.asset("img/QR.PNG"),
+                ).show();
+              },
               icon: Icon(
                 Icons.ac_unit,
               ),
-              label: Text('Cypher'),
+              label: Text('Show QR'),
             ),
           ],
         ),
