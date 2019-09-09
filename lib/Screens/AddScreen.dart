@@ -1,4 +1,4 @@
-import 'package:business_card/Classes/Current_user.dart' as prefix0;
+import 'package:business_card/Classes/Current_user.dart';
 import 'package:business_card/Classes/getimage.dart';
 import 'package:flutter/material.dart';
 import '../Classes/Current_user.dart';
