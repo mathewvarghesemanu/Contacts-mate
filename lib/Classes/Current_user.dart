@@ -1,9 +1,23 @@
 class CurrentUser {
-  String name = 'Mathew';
+  CurrentUser() {
+    QRText = 'MECARD:N:' +
+        this.lastName +
+        ',' +
+        this.firstName +
+        ';EMAIL:' +
+        this.email +
+        ';TEL:' +
+        this.phone +
+        ';';
+  }
+  String firstName = 'Mathew';
+  String lastName = 'Varghese';
+
   String designation = 'Engineer';
 
   String phone = '+91-9446050001';
   String email = 'mathewvarghesemanu@gmail.com';
+  String QRText;
 }
 
 class NewUser {

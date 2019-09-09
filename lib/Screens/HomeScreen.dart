@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Classes/Current_user.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -27,11 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             CircleAvatar(
               radius: 75.0,
-              backgroundColor: Colors.redAccent,
+              backgroundColor: Colors.teal[700],
               backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
             ),
             Text(
-              user.name,
+              user.firstName + ' ' + user.lastName,
               style: TextStyle(
                 fontFamily: 'Pacifico',
                 fontSize: 35.0,
@@ -109,10 +110,15 @@ class _HomeScreenState extends State<HomeScreen> {
             FlatButton.icon(
               onPressed: () {
                 Alert(
-                  context: context,
-                  title: "SCAN ME",
-                  image: Image.asset("img/QR.PNG"),
-                ).show();
+                    context: context,
+                    title: "SCAN ME",
+//                    image: Image.asset("img/QR.PNG"),
+                    content: QrImage(
+                      data: user.QRText,
+                      version: QrVersions.auto,
+                      size: 320,
+                      gapless: false,
+                    )).show();
               },
               icon: Icon(
                 Icons.ac_unit,

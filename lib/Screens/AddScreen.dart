@@ -5,6 +5,7 @@ import '../Classes/Current_user.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 var newvar;
 
@@ -44,14 +45,13 @@ class _AddaScreenState extends State<AddaScreen> {
               Padding(
                 padding: const EdgeInsets.all(35.0),
                 child: CircleAvatar(
-                  child: Icon(
-                    Icons.add,
-                    size: 80,
-                    color: Colors.teal,
-                  ),
-                  radius: 75.0,
-                  backgroundColor: Colors.lightGreen,
-                ),
+                    child: Icon(
+                      Icons.add,
+                      size: 80,
+                      color: Colors.teal,
+                    ),
+                    radius: 75.0,
+                    backgroundColor: Colors.cyan[300]),
               ),
               SizedBox(
                 height: 15,
@@ -88,6 +88,12 @@ class _AddaScreenState extends State<AddaScreen> {
                     loading = true;
                     await ContactsService.addContact(newContact);
                     loading = false;
+                    Alert(
+                            content: Icon(Icons.check),
+                            context: context,
+                            title: "Contact Added",
+                            desc: newContact.givenName)
+                        .show();
                   } catch (e) {
                     print('error*********assas');
                   }
