@@ -1,9 +1,7 @@
 import 'package:business_card/Classes/Current_user.dart';
-import 'package:business_card/Classes/getimage.dart';
 import 'package:business_card/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
-import 'package:contacts_service/contacts_service.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -33,6 +31,16 @@ class _NullaScreenState extends State<NullaScreen> {
         home: Scaffold(
       backgroundColor: Colors.teal,
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            size: 35,
+            color: Colors.white70,
+          ),
+        ),
         backgroundColor: Colors.teal,
       ),
       body: ModalProgressHUD(
@@ -75,7 +83,7 @@ class _NullaScreenState extends State<NullaScreen> {
                     title: "Contact Updated",
                   );
                   setState(() {});
-                  Navigator.pushNamed(context, HomeScreen().id);
+                  Navigator.pop(context);
                 },
                 child: ApplyCard(
                   label: 'Update my details',

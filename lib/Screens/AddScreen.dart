@@ -34,6 +34,16 @@ class _AddaScreenState extends State<AddaScreen> {
         home: Scaffold(
       backgroundColor: Colors.teal,
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            size: 35,
+            color: Colors.white70,
+          ),
+        ),
         backgroundColor: Colors.teal,
       ),
       body: ModalProgressHUD(

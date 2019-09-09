@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:business_card/Classes/Current_user.dart';
 
 class ApplyCard extends StatelessWidget {
   ApplyCard({this.label});
@@ -29,7 +28,7 @@ class ApplyCard extends StatelessWidget {
 class TextFields extends StatefulWidget {
   TextFields({this.newarg, this.newuser});
   final newarg;
-  var newuser;
+  final newuser;
   @override
   _TextFieldsState createState() => _TextFieldsState();
 }
