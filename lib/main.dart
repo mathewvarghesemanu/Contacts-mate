@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       backgroundColor: Colors.teal,
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -85,6 +88,32 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Card(
+              elevation: 10,
+              color: Colors.blueGrey[100],
+              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 100),
+              child: ListTile(
+                title: Text(
+                  'Add Contact',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Blinker',
+                    color: Colors.black87,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            FlatButton.icon(
+              onPressed: null,
+              icon: Icon(
+                Icons.ac_unit,
+              ),
+              label: Text('Cypher'),
             ),
           ],
         ),
