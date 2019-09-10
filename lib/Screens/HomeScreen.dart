@@ -1,5 +1,5 @@
 import 'package:business_card/Screens/AddScreen.dart';
-import 'package:business_card/nullCheckScreen.dart';
+import 'package:business_card/Screens/nullCheckScreen.dart';
 import 'package:flutter/material.dart';
 import '../Classes/Current_user.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

@@ -1,31 +1,28 @@
 import 'package:business_card/Classes/Current_user.dart';
-import 'package:business_card/Classes/getimage.dart';
+import 'package:business_card/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import '../Classes/Current_user.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
-import 'package:contacts_service/contacts_service.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 var newvar;
 
-class AddScreen extends StatelessWidget {
-  final String id = 'AddScreen';
+class NullScreen extends StatelessWidget {
+  final String id = 'NullScreen';
 
   @override
   Widget build(BuildContext context) {
-    return AddaScreen();
+    return NullaScreen();
   }
 }
 
-class AddaScreen extends StatefulWidget {
+class NullaScreen extends StatefulWidget {
   @override
-  _AddaScreenState createState() => _AddaScreenState();
+  _NullaScreenState createState() => _NullaScreenState();
 }
 
-class _AddaScreenState extends State<AddaScreen> {
+class _NullaScreenState extends State<NullaScreen> {
   final user = CurrentUser();
-  final newuser = NewUser();
   bool loading = false;
 
   @override
@@ -70,49 +67,27 @@ class _AddaScreenState extends State<AddaScreen> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child:
-                            TextFields(newarg: 'firstName', newuser: newuser),
+                        child: TextFields(newarg: 'firstName', newuser: user),
                       ),
                       Expanded(
-                          child:
-                              TextFields(newarg: 'lastName', newuser: newuser)),
+                          child: TextFields(newarg: 'lastName', newuser: user)),
                     ],
                   ),
-                  TextFields(newarg: 'designation', newuser: newuser),
-                  TextFields(newarg: 'phone number', newuser: newuser),
-                  TextFields(newarg: 'email', newuser: newuser),
-                  GestureDetector(
-                    onTap: () async {
-                      Item phone = Item(label: 'Work', value: newuser.phone);
-                      Item email = Item(label: 'Work', value: newuser.email);
-
-                      await checkContactsPermission();
-                      try {
-                        Contact newContact = Contact(
-                          givenName: newuser.firstName,
-                          familyName: newuser.lastName,
-                          phones: [phone],
-                          emails: [email],
-                        );
-
-                        print(newContact.givenName);
-                        print(newContact.phones.toList()[0].value);
-                        print(newContact.emails.toList()[0].value);
-                        loading = true;
-                        await ContactsService.addContact(newContact);
-                        loading = false;
-                        Alert(
-                                content: Icon(Icons.check),
-                                context: context,
-                                title: "Contact Added",
-                                desc: newContact.givenName)
-                            .show();
-                      } catch (e) {
-                        print('error*********assas');
-                      }
+                  TextFields(newarg: 'designation', newuser: user),
+                  TextFields(newarg: 'phone number', newuser: user),
+                  TextFields(newarg: 'email', newuser: user),
+                  InkWell(
+                    onTap: () {
+                      Alert(
+                        content: Icon(Icons.check),
+                        context: context,
+                        title: "Contact Updated",
+                      );
+                      setState(() {});
+                      Navigator.pop(context);
                     },
                     child: ApplyCard(
-                      label: 'Add as a new contact',
+                      label: 'Update my details',
                     ),
                   ),
                   FlatButton.icon(
