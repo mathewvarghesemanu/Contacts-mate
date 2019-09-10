@@ -8,7 +8,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: HomeScreen().id,
+    initialRoute: NullScreen().id,
     routes: {
       HomeScreen().id: (context) => HomeScreen(),
       AddScreen().id: (context) => AddScreen(),

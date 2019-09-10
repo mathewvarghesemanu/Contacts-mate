@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:business_card/Classes/getimage.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 var newvar;
 
@@ -24,6 +27,15 @@ class NullaScreen extends StatefulWidget {
 class _NullaScreenState extends State<NullaScreen> {
   final user = CurrentUser();
   bool loading = false;
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +63,27 @@ class _NullaScreenState extends State<NullaScreen> {
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(35.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 35, horizontal: 100),
                     child: CircleAvatar(
-                        child: Icon(
-                          Icons.add,
-                          size: 80,
-                          color: Colors.teal,
-                        ),
-                        radius: 75.0,
-                        backgroundColor: Colors.cyan[300]),
+                      radius: 80,
+                      backgroundColor: Colors.cyan[300],
+                      backgroundImage:
+                          _image == null ? null : FileImage(_image),
+                      child: InkWell(
+                          onTap: () async {
+                            setState(() {
+                              getImage();
+                            });
+                          },
+                          child: _image == null
+                              ? Icon(
+                                  Icons.add,
+                                  size: 80,
+                                  color: Colors.teal,
+                                )
+                              : null),
+                    ),
                   ),
                   SizedBox(
                     height: 15,
