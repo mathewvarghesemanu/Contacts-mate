@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:business_card/DBoperations.dart';
 
 class ApplyCard extends StatelessWidget {
   ApplyCard({this.label});
@@ -58,6 +59,7 @@ class _TextFieldsState extends State<TextFields> {
               widget.newuser.email = value;
               break;
           }
+          AddtoDB(widget.newuser);
         },
         decoration: InputDecoration(
           focusColor: Colors.white,

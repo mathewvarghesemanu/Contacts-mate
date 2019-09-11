@@ -33,7 +33,7 @@ Future AddtoDB(CurrentUser user) async {
     int id1 = await txn.rawInsert(
         'INSERT INTO PersonalData(firstName,lastName, designation, Phone,email) VALUES("' +
             user.firstName +
-            'as","' +
+            '","' +
             user.lastName +
             '","' +
             user.designation +
@@ -42,9 +42,9 @@ Future AddtoDB(CurrentUser user) async {
             '","' +
             user.email +
             '");');
-    print('addtoDB:inserted1: $id1');
+    JustReadDB();
+    print('addtoDB:inserted');
   });
-  await database.close();
 }
 
 Future ReadfromDB(CurrentUser user) async {
@@ -58,4 +58,11 @@ Future ReadfromDB(CurrentUser user) async {
   user.email = list[0]['email'];
   await database.close();
   print('readfromDB:');
+}
+
+Future JustReadDB() async {
+  Database database = await openDatabase(getPath().toString(), version: 1);
+  List<Map> list = await database.rawQuery('SELECT * FROM PersonalData');
+  print(list);
+//  print('justReadDB:');
 }

@@ -27,10 +27,6 @@ class NullaScreen extends StatefulWidget {
 
 class _NullaScreenState extends State<NullaScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
   final user = CurrentUser();
   bool loading = false;
   File _image;
@@ -54,7 +50,7 @@ class _NullaScreenState extends State<NullaScreen> {
           appBar: AppBar(
             leading: InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, HomeScreen().id);
               },
               child: Icon(
                 Icons.arrow_back,
@@ -85,7 +81,10 @@ class _NullaScreenState extends State<NullaScreen> {
                                 children: <Widget>[
                                   ApplyCard(
                                     label: '1',
-                                  )
+                                  ),
+                                  ApplyCard(
+                                    label: '2',
+                                  ),
                                 ],
                               ),
                               context: context,
@@ -123,28 +122,26 @@ class _NullaScreenState extends State<NullaScreen> {
                   InkWell(
                     onTap: () {
                       Alert(
-                        content: Icon(Icons.check),
+                        type: AlertType.success,
+                        closeFunction: () {
+                          Navigator.pushNamed(context, HomeScreen().id);
+                        },
                         context: context,
                         title: "Contact Updated",
-                      );
-                      setState(() {});
-                      Navigator.pop(context);
+                      ).show();
+
+//                      Navigator.pushNamed(context, HomeScreen().id);
                     },
                     child: ApplyCard(
                       label: 'Update my details',
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      AddtoDB(user);
-                    },
-                    child: FlatButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.ac_unit,
-                      ),
-                      label: Text('Cypher'),
+                  FlatButton.icon(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.ac_unit,
                     ),
+                    label: Text('Cypher'),
                   ),
                 ],
               ),

@@ -19,12 +19,16 @@ class _HomeScreenState extends State<HomeScreen> {
   final user = CurrentUser();
   @override
   void initState() {
-//    CreateDB();
-    AddtoDB(user);
-//    user.firstName == null
-//        ? Navigator.pushNamed(context, NullScreen().id)
-//        : ReadfromDB(user);
-    super.initState();
+    add();
+//    super.initState();
+  }
+
+  Future add() async {
+    await AddtoDB(user);
+
+    user.firstName == ''
+        ? Navigator.pushNamed(context, NullScreen().id)
+        : await ReadfromDB(user);
   }
 
   @override
@@ -61,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
                 ),
                 Text(
-                  user.firstName + ' ' + user.lastName,
+                  user.firstName == '' || user.lastName == ''
+                      ? 'NULL'
+                      : user.firstName + ' ' + user.lastName,
                   style: TextStyle(
                     fontFamily: 'Pacifico',
                     fontSize: 35.0,
@@ -70,8 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Text(
-                  'Engineer',
-//                  user.designation.toUpperCase(),
+                  user.designation == ''
+                      ? 'null'
+                      : user.designation.toUpperCase(),
                   style: TextStyle(
                       fontFamily: 'Blinker',
                       fontSize: 30,
@@ -89,8 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: () async {
                     await ReadfromDB(user);
-
-//                      print(user.lastName);
+                    setState(() {});
                   },
                   child: Card(
                     elevation: 10,
@@ -103,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         size: 40,
                       ),
                       title: Text(
-                        user.phone,
+                        user.phone == '' ? 'null' : user.phones,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Blinker',
@@ -124,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 40,
                     ),
                     title: Text(
-                      user.email,
+                      user.email == '' ? 'null' : user.email,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Blinker',

@@ -10,7 +10,7 @@ class CurrentUser {
         this.phone +
         ';';
   }
-  String firstName = 'Mathew';
+  String firstName = '';
   String lastName = 'Varghese';
 
   String designation = 'Engineer';
