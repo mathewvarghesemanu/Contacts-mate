@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:business_card/Classes/getimage.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:business_card/DBoperations.dart';
 
 var newvar;
 
@@ -25,12 +26,19 @@ class NullaScreen extends StatefulWidget {
 }
 
 class _NullaScreenState extends State<NullaScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final user = CurrentUser();
   bool loading = false;
   File _image;
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+  Future getImage(var source) async {
+    var image = await ImagePicker.pickImage(
+      source: source,
+    );
 
     setState(() {
       _image = image;
@@ -72,8 +80,20 @@ class _NullaScreenState extends State<NullaScreen> {
                           _image == null ? null : FileImage(_image),
                       child: InkWell(
                           onTap: () async {
+                            Alert(
+                              content: Row(
+                                children: <Widget>[
+                                  ApplyCard(
+                                    label: '1',
+                                  )
+                                ],
+                              ),
+                              context: context,
+                              title: "Contact Updated",
+                            );
+
                             setState(() {
-                              getImage();
+                              getImage(ImageSource.camera);
                             });
                           },
                           child: _image == null
@@ -114,12 +134,17 @@ class _NullaScreenState extends State<NullaScreen> {
                       label: 'Update my details',
                     ),
                   ),
-                  FlatButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.ac_unit,
+                  InkWell(
+                    onTap: () {
+                      AddtoDB(user);
+                    },
+                    child: FlatButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.ac_unit,
+                      ),
+                      label: Text('Cypher'),
                     ),
-                    label: Text('Cypher'),
                   ),
                 ],
               ),

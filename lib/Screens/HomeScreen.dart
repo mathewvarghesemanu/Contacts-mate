@@ -6,6 +6,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:business_card/DBoperations.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -16,6 +17,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final user = CurrentUser();
+  @override
+  void initState() {
+//    CreateDB();
+    AddtoDB(user);
+//    user.firstName == null
+//        ? Navigator.pushNamed(context, NullScreen().id)
+//        : ReadfromDB(user);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Text(
-                  user.designation.toUpperCase(),
+                  'Engineer',
+//                  user.designation.toUpperCase(),
                   style: TextStyle(
                       fontFamily: 'Blinker',
                       fontSize: 30,
@@ -75,22 +86,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.teal[100],
                   ),
                 ),
-                Card(
-                  elevation: 10,
-                  color: Colors.white,
-                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.phone,
-                      color: Colors.teal[900],
-                      size: 40,
-                    ),
-                    title: Text(
-                      user.phone,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Blinker',
-                        fontSize: 30,
+                InkWell(
+                  onTap: () async {
+                    await ReadfromDB(user);
+
+//                      print(user.lastName);
+                  },
+                  child: Card(
+                    elevation: 10,
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.phone,
+                        color: Colors.teal[900],
+                        size: 40,
+                      ),
+                      title: Text(
+                        user.phone,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Blinker',
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                   ),
