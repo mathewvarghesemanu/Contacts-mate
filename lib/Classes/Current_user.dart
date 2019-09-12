@@ -1,3 +1,5 @@
+String playLink = 'Google Play';
+
 class CurrentUser {
   void QRGenerate() {
     QRText = 'MECARD:N:' +
