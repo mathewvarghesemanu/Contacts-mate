@@ -51,7 +51,9 @@ class _NullaScreenState extends State<NullaScreen> {
             centerTitle: true,
             leading: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, HomeScreen().id);
+                Navigator.pop(context, () {
+                  setState(() {});
+                });
               },
               child: Icon(
                 Icons.arrow_back,
@@ -137,13 +139,6 @@ class _NullaScreenState extends State<NullaScreen> {
                     child: ApplyCard(
                       label: 'Update my details',
                     ),
-                  ),
-                  FlatButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.ac_unit,
-                    ),
-                    label: Text('Cypher'),
                   ),
                 ],
               ),
