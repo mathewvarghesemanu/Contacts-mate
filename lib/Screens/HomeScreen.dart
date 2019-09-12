@@ -16,19 +16,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final user = CurrentUser();
   @override
   void initState() {
     add();
-//    super.initState();
+    super.initState();
   }
 
   Future add() async {
     await AddtoDB(user);
+//    user.firstName = '';
+    if (user.firstName == null) {
+      Navigator.pushNamed(context, NullScreen().id);
+    }
 
-    user.firstName == ''
-        ? Navigator.pushNamed(context, NullScreen().id)
-        : await ReadfromDB(user);
+    await ReadfromDB(user);
+    setState(() {});
+
+//    user.show();
+
+//    JustReadDB();
   }
 
   @override
@@ -76,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Text(
-                  user.designation == ''
+                  user.designation == '' || user.designation == null
                       ? 'null'
                       : user.designation.toUpperCase(),
                   style: TextStyle(
@@ -95,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 InkWell(
                   onTap: () async {
-                    await ReadfromDB(user);
+//                    await ReadfromDB(user);
                     setState(() {});
                   },
                   child: Card(
@@ -109,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         size: 40,
                       ),
                       title: Text(
-                        user.phone == '' ? 'null' : user.phones,
+                        user.Phone == '' ? 'null' : user.Phone,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Blinker',
@@ -151,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: new ApplyCard(label: 'Add Contact'),
                 ),
                 FlatButton.icon(
-                  onPressed: () {
+                  onPressed: () async {
+                    await user.QRGenerate();
                     Alert(
                         context: context,
                         title: "SCAN ME",

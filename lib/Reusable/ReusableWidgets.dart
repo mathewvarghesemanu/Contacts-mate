@@ -53,13 +53,12 @@ class _TextFieldsState extends State<TextFields> {
               widget.newuser.designation = value;
               break;
             case 'phone number':
-              widget.newuser.phone = value;
+              widget.newuser.Phone = value;
               break;
             case 'email':
               widget.newuser.email = value;
               break;
           }
-          AddtoDB(widget.newuser);
         },
         decoration: InputDecoration(
           focusColor: Colors.white,

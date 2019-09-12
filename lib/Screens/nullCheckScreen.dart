@@ -27,7 +27,6 @@ class NullaScreen extends StatefulWidget {
 
 class _NullaScreenState extends State<NullaScreen> {
   @override
-  final user = CurrentUser();
   bool loading = false;
   File _image;
 
@@ -120,7 +119,8 @@ class _NullaScreenState extends State<NullaScreen> {
                   TextFields(newarg: 'phone number', newuser: user),
                   TextFields(newarg: 'email', newuser: user),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await AddtoDB(user);
                       Alert(
                         type: AlertType.success,
                         closeFunction: () {

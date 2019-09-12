@@ -22,41 +22,43 @@ Future CreateDB() async {
   }
 }
 
-Future AddtoDB(CurrentUser user) async {
+Future AddtoDB(CurrentUser AddUser) async {
   Database database = await openDatabase(await getPath().toString(), version: 1,
       onCreate: (Database database, int version) async {
     await database.execute(
-        'CREATE TABLE PersonalData (firstName TEXT,lastName TEXT, designation TEXT, Phone TEXT PRIMARY KEY,email TEXT);');
+        'CREATE TABLE PersonalData (firstName TEXT,lastName TEXT, designation TEXT, Phone TEXT,email TEXT);');
   });
   await database.execute("DELETE FROM PersonalData;");
   await database.transaction((txn) async {
     int id1 = await txn.rawInsert(
         'INSERT INTO PersonalData(firstName,lastName, designation, Phone,email) VALUES("' +
-            user.firstName +
+            AddUser.firstName +
             '","' +
-            user.lastName +
+            AddUser.lastName +
             '","' +
-            user.designation +
+            AddUser.designation +
             '","' +
-            user.phone +
+            AddUser.Phone +
             '","' +
-            user.email +
+            AddUser.email +
             '");');
-    JustReadDB();
+//    JustReadDB();
     print('addtoDB:inserted');
   });
 }
 
-Future ReadfromDB(CurrentUser user) async {
+Future ReadfromDB(CurrentUser ReadUser) async {
   Database database = await openDatabase(getPath().toString(), version: 1);
   List<Map> list = await database.rawQuery('SELECT * FROM PersonalData');
+  print('reading fromDB:');
+
   print(list);
-  user.firstName = list[0]['firstName'];
-  user.lastName = list[0]['lastName'];
-  user.designation = list[0]['designation`'];
-  user.phone = list[0]['phone'];
-  user.email = list[0]['email'];
-  await database.close();
+  ReadUser.firstName = list[0]['firstName'];
+  ReadUser.lastName = list[0]['lastName'];
+  ReadUser.designation = list[0]['designation'];
+  ReadUser.Phone = list[0]['Phone'];
+  ReadUser.email = list[0]['email'];
+//  await database.close();
   print('readfromDB:');
 }
 
