@@ -35,6 +35,8 @@ class _AddaScreenState extends State<AddaScreen> {
         home: Scaffold(
           backgroundColor: Colors.teal,
           appBar: AppBar(
+            title: Text('Add New Contact'),
+            centerTitle: true,
             leading: InkWell(
               onTap: () {
                 Navigator.pop(context);

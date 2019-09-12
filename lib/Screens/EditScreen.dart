@@ -47,6 +47,8 @@ class _NullaScreenState extends State<NullaScreen> {
         home: Scaffold(
           backgroundColor: Colors.teal,
           appBar: AppBar(
+            title: Text('Edit My Info'),
+            centerTitle: true,
             leading: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, HomeScreen().id);
