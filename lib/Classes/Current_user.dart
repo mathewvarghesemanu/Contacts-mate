@@ -1,3 +1,5 @@
+import 'package:flutter_sms/flutter_sms.dart';
+
 String playLink = 'Google Play';
 
 class CurrentUser {
@@ -36,7 +38,7 @@ class NewUser {
   String lastName;
 
   String designation;
-  var phone;
+  var Phone;
   var email;
 }
 

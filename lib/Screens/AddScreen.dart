@@ -8,6 +8,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:business_card/sendSMS.dart';
 
 var newvar;
 
@@ -87,11 +88,12 @@ class _AddaScreenState extends State<AddaScreen> {
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {
-                      Item phone = Item(label: 'Work', value: newuser.phone);
+                      Item phone = Item(label: 'Work', value: newuser.Phone);
                       Item email = Item(label: 'Work', value: newuser.email);
-                      if (newuser.phone == Null ||
+                      if (newuser.Phone == null ||
                           newuser.firstName == null ||
                           newuser.lastName == null) {
+                        print(newuser.Phone);
                         Fluttertoast.showToast(
                             msg:
                                 "First Name, Last Name and Phone Number are mandatory to save the contact",
@@ -101,7 +103,7 @@ class _AddaScreenState extends State<AddaScreen> {
                             backgroundColor: Colors.grey,
                             textColor: Colors.white,
                             fontSize: 16.0);
-                      } else {
+//                      } else {
                         await checkContactsPermission();
                         try {
                           Contact newContact = Contact(
@@ -111,20 +113,45 @@ class _AddaScreenState extends State<AddaScreen> {
                             emails: [email],
                           );
 
-                          print(newContact.givenName);
-                          print(newContact.phones.toList()[0].value);
-                          print(newContact.emails.toList()[0].value);
+//                          print(newContact.givenName);
+//                          print(newContact.phones.toList()[0].value);
+//                          print(newContact.emails.toList()[0].value);
                           loading = true;
                           await ContactsService.addContact(newContact);
                           loading = false;
                           Alert(
-                                  content: Icon(Icons.check),
+                                  content: InkWell(
+                                    onTap: () {
+                                      user.firstName = 'a';
+                                      user.lastName = 'b';
+                                      user.designation = 'c';
+                                      user.Phone = '9446542580';
+                                      user.email = 'man@man.com';
+                                      newuser.Phone = '9446542580';
+                                      sendSMS(user, newuser);
+                                    },
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      color: Colors.white70,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 20),
+                                        child: Text(
+                                          "Send SMS",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   context: context,
                                   title: "Contact Added",
+                                  type: AlertType.success,
                                   desc: newContact.givenName)
                               .show();
                         } catch (e) {
-                          print('error*********assas');
+                          print('error**in SMS or Contact');
                         }
                       }
                     },

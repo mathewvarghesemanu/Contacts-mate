@@ -1,3 +1,4 @@
+import 'package:business_card/Classes/Current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:business_card/DBoperations.dart';
 
@@ -28,8 +29,8 @@ class ApplyCard extends StatelessWidget {
 
 class TextFields extends StatefulWidget {
   TextFields({this.newarg, this.newuser});
-  final newarg;
-  final newuser;
+  final String newarg;
+  var newuser;
   @override
   _TextFieldsState createState() => _TextFieldsState();
 }
