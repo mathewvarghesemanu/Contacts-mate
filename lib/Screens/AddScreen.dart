@@ -7,6 +7,7 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 var newvar;
 
@@ -74,44 +75,57 @@ class _AddaScreenState extends State<AddaScreen> {
                     children: <Widget>[
                       Expanded(
                         child:
-                            TextFields(newarg: 'firstName', newuser: newuser),
+                            TextFields(newarg: '*firstName', newuser: newuser),
                       ),
                       Expanded(
-                          child:
-                              TextFields(newarg: 'lastName', newuser: newuser)),
+                          child: TextFields(
+                              newarg: '*lastName', newuser: newuser)),
                     ],
                   ),
                   TextFields(newarg: 'designation', newuser: newuser),
-                  TextFields(newarg: 'phone number', newuser: newuser),
+                  TextFields(newarg: '*phone number', newuser: newuser),
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {
                       Item phone = Item(label: 'Work', value: newuser.phone);
                       Item email = Item(label: 'Work', value: newuser.email);
+                      if (newuser.phone == Null ||
+                          newuser.firstName == null ||
+                          newuser.lastName == null) {
+                        Fluttertoast.showToast(
+                            msg:
+                                "First Name, Last Name and Phone Number are mandatory to save the contact",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIos: 1,
+                            backgroundColor: Colors.grey,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      } else {
+                        await checkContactsPermission();
+                        try {
+                          Contact newContact = Contact(
+                            givenName: newuser.firstName,
+                            familyName: newuser.lastName,
+                            phones: [phone],
+                            emails: [email],
+                          );
 
-                      await checkContactsPermission();
-                      try {
-                        Contact newContact = Contact(
-                          givenName: newuser.firstName,
-                          familyName: newuser.lastName,
-                          phones: [phone],
-                          emails: [email],
-                        );
-
-                        print(newContact.givenName);
-                        print(newContact.phones.toList()[0].value);
-                        print(newContact.emails.toList()[0].value);
-                        loading = true;
-                        await ContactsService.addContact(newContact);
-                        loading = false;
-                        Alert(
-                                content: Icon(Icons.check),
-                                context: context,
-                                title: "Contact Added",
-                                desc: newContact.givenName)
-                            .show();
-                      } catch (e) {
-                        print('error*********assas');
+                          print(newContact.givenName);
+                          print(newContact.phones.toList()[0].value);
+                          print(newContact.emails.toList()[0].value);
+                          loading = true;
+                          await ContactsService.addContact(newContact);
+                          loading = false;
+                          Alert(
+                                  content: Icon(Icons.check),
+                                  context: context,
+                                  title: "Contact Added",
+                                  desc: newContact.givenName)
+                              .show();
+                        } catch (e) {
+                          print('error*********assas');
+                        }
                       }
                     },
                     child: ApplyCard(

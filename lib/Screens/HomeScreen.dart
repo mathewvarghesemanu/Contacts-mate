@@ -26,20 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       await CreateDB();
       await ReadfromDB(user);
-      setState(() {});
 //      await AddtoDB(user);
     } catch (e) {
 //      print(e);
     }
     if (user.firstName == null) {
-      Function f;
-      f = await Navigator.pushNamed(context, NullScreen().id);
-      f();
+      Navigator.pushNamed(context, NullScreen().id);
     }
-
-//    user.show();
-
-//    JustReadDB();
+    setState(() {});
   }
 
   @override
@@ -47,6 +41,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.teal,
       appBar: AppBar(
+        centerTitle: true,
+        title: FlatButton.icon(
+          onPressed: () async {
+            await user.QRGenerate();
+            Alert(
+                context: context,
+                title: "SCAN ME",
+//                    image: Image.asset("img/QR.PNG"),
+                content: QrImage(
+                  data: user.QRText,
+                  version: QrVersions.auto,
+                  size: 320,
+                  gapless: false,
+                )).show();
+          },
+          icon: Icon(
+            Icons.ac_unit,
+          ),
+          label: Text('Show QR'),
+        ),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -160,25 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                   child: new ApplyCard(label: 'Add Contact'),
-                ),
-                FlatButton.icon(
-                  onPressed: () async {
-                    await user.QRGenerate();
-                    Alert(
-                        context: context,
-                        title: "SCAN ME",
-//                    image: Image.asset("img/QR.PNG"),
-                        content: QrImage(
-                          data: user.QRText,
-                          version: QrVersions.auto,
-                          size: 320,
-                          gapless: false,
-                        )).show();
-                  },
-                  icon: Icon(
-                    Icons.ac_unit,
-                  ),
-                  label: Text('Show QR'),
                 ),
               ],
             )
