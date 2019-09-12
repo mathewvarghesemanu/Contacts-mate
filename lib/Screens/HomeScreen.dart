@@ -22,12 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void push() async {
-    Function f;
-    f = await Navigator.pushNamed(context, NullScreen().id);
-    f();
-  }
-
   Future add() async {
     try {
       await CreateDB();
@@ -38,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
 //      print(e);
     }
     if (user.firstName == null) {
-      push();
+      Function f;
+      f = await Navigator.pushNamed(context, NullScreen().id);
+      f();
     }
 
 //    user.show();

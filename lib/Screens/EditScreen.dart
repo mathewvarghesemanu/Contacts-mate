@@ -80,23 +80,60 @@ class _NullaScreenState extends State<NullaScreen> {
                       child: InkWell(
                           onTap: () async {
                             Alert(
+                              type: AlertType.none,
                               content: Row(
                                 children: <Widget>[
-                                  ApplyCard(
-                                    label: '1',
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        getImage(ImageSource.camera);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 40),
+                                          child: Text(
+                                            'Camera',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ),
                                   ),
-                                  ApplyCard(
-                                    label: '2',
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () {
+                                        getImage(ImageSource.gallery);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 40),
+                                          child: Text(
+                                            'Gallery',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                               context: context,
-                              title: "Contact Updated",
-                            );
+                              title: "Select Image Source",
+                            ).show();
 
-                            setState(() {
-                              getImage(ImageSource.camera);
-                            });
+                            setState(() {});
                           },
                           child: _image == null
                               ? Icon(
