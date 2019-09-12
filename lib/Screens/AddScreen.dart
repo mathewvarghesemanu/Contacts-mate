@@ -27,8 +27,7 @@ class AddaScreen extends StatefulWidget {
 }
 
 class _AddaScreenState extends State<AddaScreen> {
-  final user = CurrentUser();
-  final newuser = NewUser();
+  NewUser newuser = NewUser();
   bool loading = false;
 
   @override
@@ -88,6 +87,7 @@ class _AddaScreenState extends State<AddaScreen> {
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {
+                      print(newuser.firstName);
                       Item phone = Item(label: 'Work', value: newuser.Phone);
                       Item email = Item(label: 'Work', value: newuser.email);
                       if (newuser.Phone == null ||
@@ -122,12 +122,12 @@ class _AddaScreenState extends State<AddaScreen> {
                           Alert(
                                   content: InkWell(
                                     onTap: () {
-                                      user.firstName = 'a';
-                                      user.lastName = 'b';
-                                      user.designation = 'c';
-                                      user.Phone = '9446542580';
-                                      user.email = 'man@man.com';
-                                      newuser.Phone = '9446542580';
+//                                      user.firstName = 'a';
+//                                      user.lastName = 'b';
+//                                      user.designation = 'c';
+//                                      user.Phone = '9446542580';
+//                                      user.email = 'man@man.com';
+//                                      newuser.Phone = '9446542580';
                                       sendSMS(user, newuser);
                                     },
                                     child: Card(
