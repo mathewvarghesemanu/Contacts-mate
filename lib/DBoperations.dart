@@ -11,18 +11,15 @@ Future getPath() async {
 }
 
 Future CreateDB() async {
-  try {
-    Database database = await openDatabase(await getPath().toString(),
-        version: 1, onCreate: (Database database, int version) async {
-      await database.execute(
-          'CREATE TABLE PersonalData (firstName TEXT,lastName TEXT, designation TEXT, Phone TEXT PRIMARY KEY,email TEXT)');
-    });
-  } catch (e) {
-    print(e);
-  }
+  Database database = await openDatabase(await getPath().toString(), version: 1,
+      onCreate: (Database database, int version) async {
+    await database.execute(
+        'CREATE TABLE PersonalData (firstName TEXT,lastName TEXT, designation TEXT, Phone TEXT PRIMARY KEY,email TEXT)');
+  });
 }
 
 Future AddtoDB(CurrentUser AddUser) async {
+//  try {
   Database database = await openDatabase(await getPath().toString(), version: 1,
       onCreate: (Database database, int version) async {
     await database.execute(
@@ -43,12 +40,16 @@ Future AddtoDB(CurrentUser AddUser) async {
             AddUser.email +
             '");');
 //    JustReadDB();
-    print('addtoDB:inserted');
   });
+  print('addtoDB:inserted');
+//  } catch (e) {
+//    print('addtoDB:NotInserted');
+//  }
 }
 
 Future ReadfromDB(CurrentUser ReadUser) async {
   Database database = await openDatabase(getPath().toString(), version: 1);
+
   List<Map> list = await database.rawQuery('SELECT * FROM PersonalData');
   print('reading fromDB:');
 

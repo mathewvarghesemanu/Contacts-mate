@@ -23,14 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future add() async {
-    await AddtoDB(user);
-//    user.firstName = '';
+    try {
+      await CreateDB();
+      await ReadfromDB(user);
+      setState(() {});
+//      await AddtoDB(user);
+    } catch (e) {
+//      print(e);
+    }
     if (user.firstName == null) {
       Navigator.pushNamed(context, NullScreen().id);
     }
-
-    await ReadfromDB(user);
-    setState(() {});
 
 //    user.show();
 
@@ -71,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
                 ),
                 Text(
-                  user.firstName == '' || user.lastName == ''
+                  user.firstName == null || user.lastName == null
                       ? 'NULL'
                       : user.firstName + ' ' + user.lastName,
                   style: TextStyle(
@@ -82,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Text(
-                  user.designation == '' || user.designation == null
+                  user.designation == null || user.designation == null
                       ? 'null'
                       : user.designation.toUpperCase(),
                   style: TextStyle(
@@ -115,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         size: 40,
                       ),
                       title: Text(
-                        user.Phone == '' ? 'null' : user.Phone,
+                        user.Phone == null ? 'null' : user.Phone,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Blinker',
@@ -136,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 40,
                     ),
                     title: Text(
-                      user.email == '' ? 'null' : user.email,
+                      user.email == null ? 'null' : user.email,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Blinker',

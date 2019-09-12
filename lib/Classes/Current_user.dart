@@ -19,14 +19,14 @@ class CurrentUser {
     print(this.email);
   }
 
-  String firstName = 'Mathew';
-  String lastName = 'Varghese';
+  String firstName;
+  String lastName;
 
-  String designation = 'Engineer';
+  String designation;
 
-  String Phone = '+91-9446050001';
-  String email = 'mathewvarghesemanu@gmail.com';
-  String QRText = '';
+  String Phone;
+  String email;
+  String QRText;
 }
 
 class NewUser {
