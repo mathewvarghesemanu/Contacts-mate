@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: CircleAvatar(
                     radius: 75.0,
                     backgroundColor: Colors.teal[700],
-                    backgroundImage: user.image.toString() == null
+                    backgroundImage: user.image == null
                         ? AssetImage('img/Mathew Varghese.jpg')
                         : FileImage(user.image),
                   ),
