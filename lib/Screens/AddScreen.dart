@@ -87,7 +87,7 @@ class _AddaScreenState extends State<AddaScreen> {
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {
-//                      print(newuser.firstName);
+                      print(newuser.firstName);
                       Item phone = Item(label: 'Work', value: newuser.Phone);
                       Item email = Item(label: 'Work', value: newuser.email);
                       if (newuser.Phone == null ||

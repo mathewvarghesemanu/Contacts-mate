@@ -27,11 +27,15 @@ class ApplyCard extends StatelessWidget {
   }
 }
 
-class TextFields extends StatelessWidget {
+class TextFields extends StatefulWidget {
+  TextFields({this.newarg, this.newuser});
   final String newarg;
   CurrentUser newuser = CurrentUser();
-  TextFields({this.newarg, this.newuser});
+  @override
+  _TextFieldsState createState() => _TextFieldsState();
+}
 
+class _TextFieldsState extends State<TextFields> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,29 +43,30 @@ class TextFields extends StatelessWidget {
       child: TextField(
         style: TextStyle(color: Colors.white),
         onChanged: (value) {
-          switch (newarg) {
-            case 'firstName':
-              newuser.firstName = value;
+          switch (widget.newarg) {
+            case '*firstName':
+              widget.newuser.firstName = value;
 
               break;
-            case 'lastName':
-              newuser.lastName = value;
+            case '*lastName':
+              widget.newuser.lastName = value;
               break;
             case 'designation':
-              newuser.designation = value;
+              widget.newuser.designation = value;
               break;
-            case 'phone number':
-              newuser.Phone = value;
+            case '*phone number':
+              widget.newuser.Phone = value;
               break;
             case 'email':
-              newuser.email = value;
+              widget.newuser.email = value;
+              break;
           }
 
-          print(newuser.firstName);
+//          print(widget.newuser.firstName);
         },
         decoration: InputDecoration(
           focusColor: Colors.white,
-          hintText: newarg,
+          hintText: widget.newarg,
           hintStyle: TextStyle(color: Colors.white70),
           contentPadding:
               EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
