@@ -1,4 +1,5 @@
 import 'package:flutter_sms/flutter_sms.dart';
+import 'dart:io';
 
 String playLink = 'Google Play';
 
@@ -10,7 +11,7 @@ class CurrentUser {
         this.firstName +
         ';EMAIL:' +
         this.email +
-        ';TEL:' +
+        ';TEL:+91' +
         this.Phone +
         ';';
   }
@@ -31,6 +32,7 @@ class CurrentUser {
   String Phone;
   String email;
   String QRText;
+  File image;
 }
 
 class NewUser {

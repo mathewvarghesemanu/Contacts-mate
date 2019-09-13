@@ -54,7 +54,7 @@ class _TextFieldsState extends State<TextFields> {
             case 'designation':
               widget.newuser.designation = value;
               break;
-            case '*phone number':
+            case '*phone number with country code':
               widget.newuser.Phone = value;
               break;
             case 'email':
@@ -74,11 +74,11 @@ class _TextFieldsState extends State<TextFields> {
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.teal[800], width: 1.0),
+            borderSide: BorderSide(color: Colors.teal[200], width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.teal[900], width: 2.0),
+            borderSide: BorderSide(color: Colors.white70, width: 2.0),
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
         ),

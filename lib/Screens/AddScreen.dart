@@ -35,7 +35,7 @@ class _AddaScreenState extends State<AddaScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.teal[800],
           appBar: AppBar(
             title: Text('Add New Contact'),
             centerTitle: true,
@@ -49,7 +49,7 @@ class _AddaScreenState extends State<AddaScreen> {
                 color: Colors.white70,
               ),
             ),
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.teal[600],
           ),
           body: ModalProgressHUD(
             inAsyncCall: loading,
@@ -83,7 +83,9 @@ class _AddaScreenState extends State<AddaScreen> {
                     ],
                   ),
                   TextFields(newarg: 'designation', newuser: newuser),
-                  TextFields(newarg: '*phone number', newuser: newuser),
+                  TextFields(
+                      newarg: '*phone number with country code',
+                      newuser: newuser),
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {

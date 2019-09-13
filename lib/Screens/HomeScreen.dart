@@ -7,6 +7,7 @@ import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:business_card/DBoperations.dart';
+import 'package:business_card/Screens/EditScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -84,107 +85,126 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.teal[600],
       ),
       body: SafeArea(
-        child: ListView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
                   child: CircleAvatar(
                     radius: 75.0,
                     backgroundColor: Colors.teal[700],
-                    backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
+                    backgroundImage: user.image.toString() == null
+                        ? AssetImage('img/Mathew Varghese.jpg')
+                        : FileImage(user.image),
                   ),
                 ),
-                Text(
-                  user.firstName == null || user.lastName == null
-                      ? 'NULL'
-                      : user.firstName + ' ' + user.lastName,
-                  style: TextStyle(
-                    fontFamily: 'Pacifico',
-                    fontSize: 35.0,
+              ),
+            ),
+            Center(
+              child: Text(
+                user.firstName == null || user.lastName == null
+                    ? 'NULL'
+                    : user.firstName + ' ' + user.lastName,
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                  fontSize: 35.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                user.designation == null || user.designation == null
+                    ? 'null'
+                    : user.designation.toUpperCase(),
+                style: TextStyle(
+                    fontFamily: 'Blinker',
+                    fontSize: 30,
                     color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                Text(
-                  user.designation == null || user.designation == null
-                      ? 'null'
-                      : user.designation.toUpperCase(),
-                  style: TextStyle(
-                      fontFamily: 'Blinker',
-                      fontSize: 30,
-                      color: Colors.white,
-                      letterSpacing: 2.5),
-                ),
-                SizedBox(
-                  height: 20,
+                    letterSpacing: 2.5),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  height: 15,
                   width: 300,
                   child: Divider(
                     height: 2,
                     color: Colors.teal[100],
                   ),
                 ),
-                InkWell(
-                  onTap: () async {
-//                    await ReadfromDB(user);
-                    setState(() {});
-                  },
-                  child: Card(
-                    elevation: 10,
-                    color: Colors.white,
-                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.phone,
-                        color: Colors.teal[900],
-                        size: 40,
-                      ),
-                      title: Text(
-                        user.Phone == null ? 'null' : user.Phone,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Blinker',
-                          fontSize: 30,
-                        ),
-                      ),
+              ),
+            ),
+
+            InkWell(
+              onTap: () async {
+                await ReadfromDB(user);
+                print(user.image.toString());
+                setState(() {});
+              },
+              child: Card(
+                elevation: 10,
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.phone,
+                    color: Colors.teal[900],
+                    size: 40,
+                  ),
+                  title: Text(
+                    user.Phone == null ? 'null' : user.Phone,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Blinker',
+                      fontSize: 30,
                     ),
                   ),
                 ),
-                Card(
-                  elevation: 10,
-                  color: Colors.white,
-                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.mail,
-                      color: Colors.teal[900],
-                      size: 40,
-                    ),
-                    title: Text(
-                      user.email == null ? 'null' : user.email,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Blinker',
-                        fontSize: 24,
-                      ),
-                    ),
+              ),
+            ),
+            Card(
+              elevation: 10,
+              color: Colors.white,
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              child: ListTile(
+                leading: Icon(
+                  Icons.mail,
+                  color: Colors.teal[900],
+                  size: 40,
+                ),
+                title: Text(
+                  user.email == null ? 'null' : user.email,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Blinker',
+                    fontSize: 24,
                   ),
                 ),
+              ),
+            ),
 //            SizedBox(
 //              height: 10,
 //            ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      Navigator.pushNamed(context, AddScreen().id);
-                    });
-                  },
-                  child: new ApplyCard(label: 'Add Contact'),
-                ),
-              ],
-            )
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    Navigator.pushNamed(context, AddScreen().id);
+                  });
+                },
+                child: new ApplyCard(label: 'Add Contact'),
+              ),
+            ),
           ],
         ),
       ),

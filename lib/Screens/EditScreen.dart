@@ -28,7 +28,6 @@ class NullaScreen extends StatefulWidget {
 class _NullaScreenState extends State<NullaScreen> {
   @override
   bool loading = false;
-  File _image;
 
   Future getImage(var source) async {
     var image = await ImagePicker.pickImage(
@@ -36,7 +35,8 @@ class _NullaScreenState extends State<NullaScreen> {
     );
 
     setState(() {
-      _image = image;
+      user.image = image;
+      print(user.image);
     });
   }
 
@@ -45,7 +45,7 @@ class _NullaScreenState extends State<NullaScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.teal[800],
           appBar: AppBar(
             title: Text('Edit My Info'),
             centerTitle: true,
@@ -61,7 +61,7 @@ class _NullaScreenState extends State<NullaScreen> {
                 color: Colors.white70,
               ),
             ),
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.teal[600],
           ),
           body: ModalProgressHUD(
             inAsyncCall: loading,
@@ -76,7 +76,7 @@ class _NullaScreenState extends State<NullaScreen> {
                       radius: 80,
                       backgroundColor: Colors.cyan[300],
                       backgroundImage:
-                          _image == null ? null : FileImage(_image),
+                          user.image == null ? null : FileImage(user.image),
                       child: InkWell(
                           onTap: () async {
                             Alert(
@@ -135,7 +135,7 @@ class _NullaScreenState extends State<NullaScreen> {
 
                             setState(() {});
                           },
-                          child: _image == null
+                          child: user.image == null
                               ? Icon(
                                   Icons.add,
                                   size: 80,
@@ -150,14 +150,16 @@ class _NullaScreenState extends State<NullaScreen> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: TextFields(newarg: 'firstName', newuser: user),
+                        child: TextFields(newarg: '*firstName', newuser: user),
                       ),
                       Expanded(
-                          child: TextFields(newarg: 'lastName', newuser: user)),
+                          child:
+                              TextFields(newarg: '*lastName', newuser: user)),
                     ],
                   ),
                   TextFields(newarg: 'designation', newuser: user),
-                  TextFields(newarg: 'phone number', newuser: user),
+                  TextFields(
+                      newarg: '*phone number with country code', newuser: user),
                   TextFields(newarg: 'email', newuser: user),
                   InkWell(
                     onTap: () async {
