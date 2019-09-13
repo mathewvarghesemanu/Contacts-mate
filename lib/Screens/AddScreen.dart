@@ -27,7 +27,7 @@ class AddaScreen extends StatefulWidget {
 }
 
 class _AddaScreenState extends State<AddaScreen> {
-  NewUser newuser = NewUser();
+  CurrentUser newuser = CurrentUser();
   bool loading = false;
 
   @override
@@ -87,13 +87,13 @@ class _AddaScreenState extends State<AddaScreen> {
                   TextFields(newarg: 'email', newuser: newuser),
                   GestureDetector(
                     onTap: () async {
-                      print(newuser.firstName);
+//                      print(newuser.firstName);
                       Item phone = Item(label: 'Work', value: newuser.Phone);
                       Item email = Item(label: 'Work', value: newuser.email);
                       if (newuser.Phone == null ||
                           newuser.firstName == null ||
                           newuser.lastName == null) {
-                        print(newuser.Phone);
+//                        newuser.show();
                         Fluttertoast.showToast(
                             msg:
                                 "First Name, Last Name and Phone Number are mandatory to save the contact",
@@ -103,7 +103,7 @@ class _AddaScreenState extends State<AddaScreen> {
                             backgroundColor: Colors.grey,
                             textColor: Colors.white,
                             fontSize: 16.0);
-//                      } else {
+                      } else {
                         await checkContactsPermission();
                         try {
                           Contact newContact = Contact(

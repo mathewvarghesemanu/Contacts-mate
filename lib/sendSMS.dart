@@ -1,7 +1,7 @@
 import 'package:business_card/Classes/Current_user.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 
-void sendSMS(CurrentUser user, NewUser newuser) async {
+void sendSMS(CurrentUser user, CurrentUser newuser) async {
 //    this.show();
 
   String message = 'Name: ' +
@@ -13,7 +13,7 @@ void sendSMS(CurrentUser user, NewUser newuser) async {
       '\nEmail: ' +
       user.email.toString();
   List<String> recipents = [newuser.Phone];
-
+//  print(message);
   String _result =
       await FlutterSms.sendSMS(message: message, recipients: recipents)
           .catchError((onError) {
