@@ -39,10 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.teal[800],
       appBar: AppBar(
         centerTitle: true,
         title: FlatButton.icon(
+          color: Colors.teal[900],
           onPressed: () async {
             await user.QRGenerate();
             Alert(
@@ -58,8 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           icon: Icon(
             Icons.ac_unit,
+            color: Colors.white70,
           ),
-          label: Text('Show QR'),
+          label: Text(
+            'Show QR',
+            style: TextStyle(fontSize: 25, color: Colors.white70),
+          ),
         ),
         actions: <Widget>[
           Padding(
@@ -76,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )
         ],
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal[600],
       ),
       body: SafeArea(
         child: ListView(
@@ -84,10 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 75.0,
-                  backgroundColor: Colors.teal[700],
-                  backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: CircleAvatar(
+                    radius: 75.0,
+                    backgroundColor: Colors.teal[700],
+                    backgroundImage: AssetImage('img/Mathew Varghese.jpg'),
+                  ),
                 ),
                 Text(
                   user.firstName == null || user.lastName == null

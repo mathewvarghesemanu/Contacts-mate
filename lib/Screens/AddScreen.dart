@@ -57,19 +57,19 @@ class _AddaScreenState extends State<AddaScreen> {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(35.0),
-                    child: CircleAvatar(
-                        child: Icon(
-                          Icons.add,
-                          size: 80,
-                          color: Colors.teal,
-                        ),
-                        radius: 75.0,
-                        backgroundColor: Colors.cyan[300]),
-                  ),
+//                  Padding(
+//                    padding: const EdgeInsets.all(35.0),
+//                    child: CircleAvatar(
+//                        child: Icon(
+//                          Icons.add,
+//                          size: 80,
+//                          color: Colors.teal,
+//                        ),
+//                        radius: 75.0,
+//                        backgroundColor: Colors.cyan[300]),
+//                  ),
                   SizedBox(
-                    height: 15,
+                    height: 100,
                   ),
                   Row(
                     children: <Widget>[
@@ -148,7 +148,11 @@ class _AddaScreenState extends State<AddaScreen> {
                                   context: context,
                                   title: "Contact Added",
                                   type: AlertType.success,
-                                  desc: newContact.givenName)
+                                  desc: newContact.givenName +
+                                      ' ' +
+                                      newContact.familyName +
+                                      '\n' +
+                                      newuser.Phone)
                               .show();
                         } catch (e) {
                           print('error**in SMS or Contact');
