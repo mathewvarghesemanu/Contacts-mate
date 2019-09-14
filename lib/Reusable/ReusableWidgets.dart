@@ -1,6 +1,6 @@
 import 'package:business_card/Classes/Current_user.dart';
 import 'package:flutter/material.dart';
-import 'package:business_card/DBoperations.dart';
+import 'package:business_card/Classes/DBoperations.dart';
 
 class ApplyCard extends StatelessWidget {
   ApplyCard({this.label});

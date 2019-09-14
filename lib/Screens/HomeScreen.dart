@@ -6,20 +6,25 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:business_card/Reusable/ReusableWidgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:business_card/DBoperations.dart';
+import 'package:business_card/Classes/DBoperations.dart';
 import 'package:business_card/Screens/EditScreen.dart';
+import 'dart:io';
+import 'package:business_card/Classes/FileOperations.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String imagePath;
+
   @override
   void initState() {
     add();
+
     super.initState();
   }
 
@@ -31,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
 //      print(e);
     }
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    imagePath = appDocDir.path;
     if (user.firstName == null) {
       Navigator.pushNamed(context, NullScreen().id);
     }
@@ -50,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             Alert(
                 context: context,
                 title: "SCAN ME",
-//                    image: Image.asset("img/QR.PNG"),
                 content: QrImage(
                   data: user.QRText,
                   version: QrVersions.auto,
@@ -98,9 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: CircleAvatar(
                     radius: 75.0,
                     backgroundColor: Colors.teal[700],
-                    backgroundImage: user.image == null
-                        ? AssetImage('img/Mathew Varghese.jpg')
-                        : FileImage(user.image),
+                    backgroundImage: getImageProvider(imagePath),
                   ),
                 ),
               ),
@@ -146,8 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
             InkWell(
               onTap: () async {
-                await ReadfromDB(user);
-                print(user.image.toString());
+                if (user.image != null) {
+//                  CopyPaste(user);
+                  print(user.image.path);
+                }
                 setState(() {});
               },
               child: Card(

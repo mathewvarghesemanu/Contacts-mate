@@ -7,7 +7,9 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:business_card/Classes/getimage.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:business_card/DBoperations.dart';
+import 'package:business_card/Classes/DBoperations.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:business_card/Classes/FileOperations.dart';
 
 var newvar;
 
@@ -33,7 +35,7 @@ class _NullaScreenState extends State<NullaScreen> {
     var image = await ImagePicker.pickImage(
       source: source,
     );
-
+    CopyPaste(user);
     setState(() {
       user.image = image;
       print(user.image);
