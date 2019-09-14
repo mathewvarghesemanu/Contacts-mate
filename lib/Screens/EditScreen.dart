@@ -13,7 +13,7 @@ import 'package:business_card/Classes/FileOperations.dart';
 
 var newvar;
 
-class NullScreen extends StatelessWidget {
+class EditScreen extends StatelessWidget {
   final String id = 'NullScreen';
 
   @override
@@ -28,18 +28,16 @@ class NullaScreen extends StatefulWidget {
 }
 
 class _NullaScreenState extends State<NullaScreen> {
+  File image;
+
   @override
   bool loading = false;
 
-  Future getImage(var source) async {
-    var image = await ImagePicker.pickImage(
-      source: source,
-    );
-    CopyPaste(user);
-    setState(() {
-      user.image = image;
-      print(user.image);
-    });
+  Future<File> getImage(var source) async {
+    var tempImage = await ImagePicker.pickImage(source: source);
+
+    setState(() {});
+    return tempImage;
   }
 
   @override
@@ -77,8 +75,7 @@ class _NullaScreenState extends State<NullaScreen> {
                     child: CircleAvatar(
                       radius: 80,
                       backgroundColor: Colors.cyan[300],
-                      backgroundImage:
-                          user.image == null ? null : FileImage(user.image),
+                      backgroundImage: image == null ? null : FileImage(image),
                       child: InkWell(
                           onTap: () async {
                             Alert(
@@ -87,8 +84,10 @@ class _NullaScreenState extends State<NullaScreen> {
                                 children: <Widget>[
                                   Expanded(
                                     child: InkWell(
-                                      onTap: () {
-                                        getImage(ImageSource.camera);
+                                      onTap: () async {
+                                        image =
+                                            await getImage(ImageSource.camera);
+
                                         Navigator.pop(context);
                                       },
                                       child: Card(
@@ -109,8 +108,9 @@ class _NullaScreenState extends State<NullaScreen> {
                                   ),
                                   Expanded(
                                     child: InkWell(
-                                      onTap: () {
-                                        getImage(ImageSource.gallery);
+                                      onTap: () async {
+                                        image =
+                                            await getImage(ImageSource.gallery);
                                         Navigator.pop(context);
                                       },
                                       child: Card(
@@ -137,7 +137,7 @@ class _NullaScreenState extends State<NullaScreen> {
 
                             setState(() {});
                           },
-                          child: user.image == null
+                          child: image == null
                               ? Icon(
                                   Icons.add,
                                   size: 80,
@@ -165,7 +165,12 @@ class _NullaScreenState extends State<NullaScreen> {
                   TextFields(newarg: 'email', newuser: user),
                   InkWell(
                     onTap: () async {
+                      user.image = image;
+                      await CopyPaste(user);
+                      user.imageExist = '1';
+                      setState(() {});
                       await AddtoDB(user);
+                      print(user.image);
                       Alert(
                         type: AlertType.success,
                         closeFunction: () {

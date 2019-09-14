@@ -11,6 +11,7 @@ import 'package:business_card/Screens/EditScreen.dart';
 import 'dart:io';
 import 'package:business_card/Classes/FileOperations.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class HomeScreen extends StatefulWidget {
   final id = 'HomeScreen';
@@ -20,26 +21,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String imagePath;
+  bool loadingState = false;
 
   @override
   void initState() {
     add();
-
     super.initState();
   }
 
   Future add() async {
     try {
-      await CreateDB();
+//      await CreateDB();
       await ReadfromDB(user);
-//      await AddtoDB(user);
     } catch (e) {
 //      print(e);
     }
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    imagePath = appDocDir.path;
+    if (user.image == null) {
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      imagePath = appDocDir.path;
+      print(imagePath);
+      user.image = await File(imagePath + '/image1.jpg');
+    }
     if (user.firstName == null) {
-      Navigator.pushNamed(context, NullScreen().id);
+      Navigator.pushNamed(context, EditScreen().id);
     }
     setState(() {});
   }
@@ -78,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(10.0),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, NullScreen().id);
+                Navigator.pushNamed(context, EditScreen().id);
               },
               child: Icon(
                 FontAwesomeIcons.edit,
@@ -90,128 +94,131 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: Colors.teal[600],
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: CircleAvatar(
-                    radius: 75.0,
-                    backgroundColor: Colors.teal[700],
-                    backgroundImage: getImageProvider(imagePath),
+      body: ModalProgressHUD(
+        inAsyncCall: loadingState,
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: CircleAvatar(
+                      radius: 75.0,
+                      backgroundColor: Colors.teal[700],
+                      backgroundImage: user.imageExist == '1'
+                          ? FileImage(user.image)
+                          : AssetImage('img/avatar.jpg'),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Text(
-                user.firstName == null || user.lastName == null
-                    ? 'NULL'
-                    : user.firstName + ' ' + user.lastName,
-                style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: 35.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                user.designation == null || user.designation == null
-                    ? 'null'
-                    : user.designation.toUpperCase(),
-                style: TextStyle(
-                    fontFamily: 'Blinker',
-                    fontSize: 30,
+              Center(
+                child: Text(
+                  user.firstName == null || user.lastName == null
+                      ? ''
+                      : user.firstName + ' ' + user.lastName,
+                  style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    fontSize: 35.0,
                     color: Colors.white,
-                    letterSpacing: 2.5),
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  height: 15,
-                  width: 300,
-                  child: Divider(
-                    height: 2,
-                    color: Colors.teal[100],
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
-            ),
+              Center(
+                child: Text(
+                  user.designation == null || user.designation == null
+                      ? ''
+                      : user.designation.toUpperCase(),
+                  style: TextStyle(
+                      fontFamily: 'Blinker',
+                      fontSize: 30,
+                      color: Colors.white,
+                      letterSpacing: 2.5),
+                ),
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 15,
+                    width: 300,
+                    child: Divider(
+                      height: 2,
+                      color: Colors.teal[100],
+                    ),
+                  ),
+                ),
+              ),
 
-            InkWell(
-              onTap: () async {
-                if (user.image != null) {
-//                  CopyPaste(user);
-                  print(user.image.path);
-                }
-                setState(() {});
-              },
-              child: Card(
+              InkWell(
+                onTap: () async {
+                  setState(() {
+                    print(user.image);
+                  });
+                },
+                child: Card(
+                  elevation: 10,
+                  color: Colors.white,
+                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.teal[900],
+                      size: 40,
+                    ),
+                    title: Text(
+                      user.Phone == null ? '' : user.Phone,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Blinker',
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Card(
                 elevation: 10,
                 color: Colors.white,
                 margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 child: ListTile(
                   leading: Icon(
-                    Icons.phone,
+                    Icons.mail,
                     color: Colors.teal[900],
                     size: 40,
                   ),
                   title: Text(
-                    user.Phone == null ? 'null' : user.Phone,
+                    user.email == null ? '' : user.email,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Blinker',
-                      fontSize: 30,
+                      fontSize: 24,
                     ),
                   ),
                 ),
               ),
-            ),
-            Card(
-              elevation: 10,
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-              child: ListTile(
-                leading: Icon(
-                  Icons.mail,
-                  color: Colors.teal[900],
-                  size: 40,
-                ),
-                title: Text(
-                  user.email == null ? 'null' : user.email,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Blinker',
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
 //            SizedBox(
 //              height: 10,
 //            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    Navigator.pushNamed(context, AddScreen().id);
-                  });
-                },
-                child: new ApplyCard(label: 'Add Contact'),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      Navigator.pushNamed(context, AddScreen().id);
+                    });
+                  },
+                  child: new ApplyCard(label: 'Add Contact'),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

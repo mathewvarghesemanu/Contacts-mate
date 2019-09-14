@@ -33,15 +33,7 @@ class CurrentUser {
   String email;
   String QRText;
   File image;
-}
-
-class NewUser {
-  String firstName;
-  String lastName;
-
-  String designation;
-  var Phone;
-  var email;
+  String imageExist = '0';
 }
 
 final user = CurrentUser();

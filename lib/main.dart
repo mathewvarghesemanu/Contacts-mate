@@ -12,7 +12,7 @@ void main() {
     routes: {
       HomeScreen().id: (context) => HomeScreen(),
       AddScreen().id: (context) => AddScreen(),
-      NullScreen().id: (context) => NullScreen(),
+      EditScreen().id: (context) => EditScreen(),
     },
   ));
 }
