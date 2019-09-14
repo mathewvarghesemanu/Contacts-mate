@@ -1,14 +1,14 @@
-import 'package:business_card/Classes/Current_user.dart';
-import 'package:business_card/Classes/getimage.dart';
+import 'package:ContactsMate/Classes/Current_user.dart';
+import 'package:ContactsMate/Classes/getimage.dart';
 import 'package:flutter/material.dart';
 import '../Classes/Current_user.dart';
-import 'package:business_card/Reusable/ReusableWidgets.dart';
+import 'package:ContactsMate/Reusable/ReusableWidgets.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:business_card/Classes/sendSMS.dart';
+import 'package:ContactsMate/Classes/sendSMS.dart';
 
 var newvar;
 

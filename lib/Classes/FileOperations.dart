@@ -1,4 +1,4 @@
-import 'package:business_card/Classes/Current_user.dart';
+import 'package:ContactsMate/Classes/Current_user.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';

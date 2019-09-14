@@ -1,4 +1,4 @@
-# business_card
+# ContactsMate
 
 A personal business card
 

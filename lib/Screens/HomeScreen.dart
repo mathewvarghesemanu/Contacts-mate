@@ -1,15 +1,15 @@
-import 'package:business_card/Screens/AddScreen.dart';
-import 'package:business_card/Screens/EditScreen.dart';
+import 'package:ContactsMate/Screens/AddScreen.dart';
+import 'package:ContactsMate/Screens/EditScreen.dart';
 import 'package:flutter/material.dart';
 import '../Classes/Current_user.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:business_card/Reusable/ReusableWidgets.dart';
+import 'package:ContactsMate/Reusable/ReusableWidgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:business_card/Classes/DBoperations.dart';
-import 'package:business_card/Screens/EditScreen.dart';
+import 'package:ContactsMate/Classes/DBoperations.dart';
+import 'package:ContactsMate/Screens/EditScreen.dart';
 import 'dart:io';
-import 'package:business_card/Classes/FileOperations.dart';
+import 'package:ContactsMate/Classes/FileOperations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 

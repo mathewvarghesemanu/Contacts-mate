@@ -1,4 +1,4 @@
-import 'package:business_card/Classes/Current_user.dart';
+import 'package:ContactsMate/Classes/Current_user.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 
 void sendSMS(CurrentUser user, CurrentUser newuser) async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:business_card/Classes/Current_user.dart';
+import 'package:ContactsMate/Classes/Current_user.dart';
 import 'package:path/path.dart';
 
 Future getPath() async {

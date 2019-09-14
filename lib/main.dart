@@ -1,8 +1,8 @@
-import 'package:business_card/Screens/EditScreen.dart';
+import 'package:ContactsMate/Screens/EditScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:business_card/Screens/HomeScreen.dart';
-import 'package:business_card/Screens/AddScreen.dart';
+import 'package:ContactsMate/Screens/HomeScreen.dart';
+import 'package:ContactsMate/Screens/AddScreen.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

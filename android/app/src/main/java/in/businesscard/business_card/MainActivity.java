@@ -1,4 +1,4 @@
-package in.businesscard.business_card;
+package in.Smartfolio.ContactsMate;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
