@@ -54,11 +54,13 @@ class _NullaScreenState extends State<NullaScreen> {
               onTap: () {
                 Navigator.pushNamed(context, HomeScreen().id);
               },
-              child: Icon(
-                Icons.arrow_back,
-                size: 35,
-                color: Colors.white70,
-              ),
+              child: user.firstName == null
+                  ? null
+                  : Icon(
+                      Icons.arrow_back,
+                      size: 35,
+                      color: Colors.white70,
+                    ),
             ),
             backgroundColor: Colors.teal[600],
           ),
