@@ -83,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, EditScreen().id);
+                setState(() {});
               },
               child: Icon(
                 FontAwesomeIcons.edit,

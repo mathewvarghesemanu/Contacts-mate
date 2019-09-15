@@ -52,9 +52,7 @@ class _NullaScreenState extends State<NullaScreen> {
             centerTitle: true,
             leading: InkWell(
               onTap: () {
-                Navigator.pop(context, () {
-                  setState(() {});
-                });
+                Navigator.pushNamed(context, HomeScreen().id);
               },
               child: Icon(
                 Icons.arrow_back,
